@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>首页</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+  
+<script src="/hexo/js/jquery.js"></script>
+
+  
+<link rel="stylesheet" href="/hexo/css/index.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/markdown.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+<body>
+  <div id="app">
+    <div id="app-header">
+      <!-- <div id="spring"></div> -->
+      <div class="app-icon icon-d"></div>
+      <div class="app-icon icon-f"></div>
+      <div class="app-icon icon-c"></div>
+      <div class="app-icon icon-g"></div>
+      <div class="app-icon icon-e"></div>
+      <div class="app-icon icon-a"></div>
+      <div class="app-icon icon-b"></div>
+    </div>
+
+    <div id="search-bar">
+      <input id="search-input" type="text" autofocus='autofocus' />
+    </div>
+
+    <div id="content-wrapper">
+
+      <!-- 分类列表 -->
+      
+      <div id="category-bar">
+        <span class="text">分类:</span>
+        <a class="category-link active" href="/" >全部</a>
+        <a class="category-link" href="/hexo/categories/%E6%8E%A8%E8%8D%90/">推荐</a> <a class="category-link" href="/hexo/categories/%E6%97%A5%E5%B8%B8/">日常</a>
+      </div>
+      
+
+      <!-- 文章列表 -->
+      <ul class="post-list">
+        
+          <li class="post-list-item">
+            <a class="item-link" href="/hexo/2021/02/03/hello-world/" >
+              <span class="title">Hello World</span>
+            </a>
+            <span class="time">2021-02-03</span>
+          </li>
+        
+      </ul>
+
+      
+
+    </div>
+
+    <div id="search-result-wrapper">
+    </div>
+
+  </div>
+</body>
+ <script type="text/javascript">   
+
+  var app = {
+    searchInput:null,
+    searchBtn: null,
+    contentWrapper: null,
+    searchResultWrapper: null,
+    appData: [],
+    appIcon: null,
+    backgroundSize: '',
+    init: function(){
+      this.searchInput = $('#search-input');
+      this.searchBtn = $('#search-btn');
+      this.contentWrapper = $('#content-wrapper');
+      this.searchResultWrapper = $('#search-result-wrapper');
+      this.appIcon = $(".app-icon");
+      this.fetchData();
+      this.searchInput.on("input", this.filterData.bind(this));
+      this.highlightCategory();
+      this.showIcon();
+    },
+    fetchData: function(){
+      var me = this;
+      var url = window.location.origin + '/hexo/' + 'search.xml';
+      $.ajax({
+        url: url,
+        dataType: "xml",
+        success: function( xmlResponse ) {
+          var result = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          me.appData = result;
+        }
+      })
+    },
+    filterData: function(){
+      var keywords = this.searchInput.val().trim().split(/[\s\-]+/);
+      if(!this.searchInput.val().trim()){
+        this.contentWrapper.show();
+        this.searchResultWrapper.hide();
+        return;
+      }
+      var str = '<ul class=\"search-result-list\">';
+      var length = 0;
+      this.appData.forEach(function (data) {
+        var isMatch = true;
+        var content_index = [];
+        if (!data.title || data.title.trim() === '') {
+          data.title = "Untitled";
+        }
+        var data_title = data.title.trim();
+        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+        // var data_content = data.content;
+        var data_url = data.url;
+        var index_title = -1;
+        var index_content = -1;
+        var first_occur = -1;
+        // only match artiles with not empty contents
+        if (data_content !== '') {
+            keywords.forEach(function (keyword, i) {
+                index_title = data_title.indexOf(keyword);
+                index_content = data_content.indexOf(keyword);
+
+                if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                } else {
+                    if (index_content < 0) {
+                        index_content = 0;
+                    }
+                    if (i == 0) {
+                        first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                }
+            });
+        } else {
+            isMatch = false;
+        }
+        // show search results
+        if (isMatch) {
+          length++;
+          str += "<li class='search-result-item'><a class='item-title' href='" + data_url + "' >" + data_title + "</a>";
+          var content = data.content.trim().replace(/<[^>]+>/g, " ");
+          if (first_occur >= 0) {
+              // cut out 100 characters
+              var start = first_occur - 20;
+              var end = first_occur + 80;
+
+              if (start < 0) {
+                  start = 0;
+              }
+
+              if (start == 0) {
+                  end = 100;
+              }
+
+              if (end > content.length) {
+                  end = content.length;
+              }
+
+              var match_content = content.substring(start, end);
+
+              // highlight all keywords
+              keywords.forEach(function (keyword) {
+                  var regS = new RegExp(keyword, "gi");
+                  match_content = match_content.replace(regS, "<em class=\"highlight-search-keyword\">" + keyword + "</em>");
+              });
+
+              str += "<p class=\"item-content\">" + match_content + "...</p>"
+          }
+          str += "</li>";
+        }
+      }); 
+      str = str + "</ul>";
+      str = '<h2 id="search-result-count">'+ '共找到'+length+'条相关结果'+ '</h2>' + str;
+      this.contentWrapper.hide();
+      this.searchResultWrapper.empty();
+      this.searchResultWrapper.append(str).show();
+    },
+    highlightCategory: function(){
+      $('.category-link').each(function(){
+        if( $(this).text() == window.name){
+          $(this).addClass('active');
+        }else {
+          $(this).removeClass('active');
+        }
+      })
+      $('.category-link').on('click', function(event){
+        window.name = event.target.innerText;
+      })
+    },
+    showIcon: function(){
+      var me = this;
+      this.appIcon.hover(function(){
+        me.backgroundSize = $(this).css('background-size');
+        $(this).css({backgroundSize:'44px'})
+      }, function(){
+        $(this).css({backgroundSize: me.backgroundSize})
+      })
+    }
+  }
+
+  app.init();
+
+
+ </script>
+</html>

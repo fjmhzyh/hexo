@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/hexo/2021/02/03/hello-world/"/>
+      <url>/hexo/2021/02/03/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 推荐 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> default </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>My New Post</title>
+      <link href="/hexo/2021/02/01/My-New-Post/"/>
+      <url>/hexo/2021/02/01/My-New-Post/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Tuesday</title>
+      <link href="/hexo/2021/01/19/Tuesday/"/>
+      <url>/hexo/2021/01/19/Tuesday/</url>
+      
+        <content type="html"><![CDATA[<h1 id="在-Markdown-中-使用-Vue"><a href="#在-Markdown-中-使用-Vue" class="headerlink" title="在 Markdown 中 使用 Vue"></a>在 Markdown 中 使用 Vue</h1><h2 id="浏览器的-API-访问限制"><a href="#浏览器的-API-访问限制" class="headerlink" title="浏览器的 API 访问限制"></a>浏览器的 API 访问限制</h2><p>  当你在开发一个 VuePress 应用时，由于所有的页面在生成静态 HTML 时都需要通过 Node.js 服务端渲染，因此所有的 Vue 相关代码都应当遵循 <a href="https://ssr.vuejs.org/zh/universal.html">编写通用代码 (opens new window)</a>的要求。简而言之，请确保只在 <code>beforeMount</code> 或者 <code>mounted</code> 访问浏览器 / DOM 的 API。</p><p>  如果你正在使用，或者需要展示一个对于 SSR 不怎么友好的组件（比如包含了自定义指令），你可以将它们包裹在内置的 <code>&lt;ClientOnly&gt;</code> 组件中：</p>  <pre class="language-md" data-language="md"><code class="language-md"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ClientOnly</span><span class="token punctuation">></span></span>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>NonSSRFriendlyComponent</span><span class="token punctuation">/></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ClientOnly</span><span class="token punctuation">></span></span></code></pre><p>  请注意，这并不能解决一些组件或库在<strong>导入</strong>时就试图访问浏览器 API 的问题 —— 如果需要使用这样的组件或库，你需要在合适的生命周期钩子中<strong>动态导入</strong>它们：</p>  <pre class="language-vue" data-language="vue"><code class="language-vue">&lt;script&gt;export default &#123;  mounted () &#123;    import(&#39;.&#x2F;lib-that-access-window-on-import&#39;).then(module &#x3D;&gt; &#123;      &#x2F;&#x2F; use code    &#125;)  &#125;&#125;&lt;&#x2F;script&gt;</code></pre><p>  如果你的模块通过 <code>export default</code> 导出一个 Vue 组件，那么你可以动态注册它：</p>  <pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;  &lt;component v-if&#x3D;&quot;dynamicComponent&quot; :is&#x3D;&quot;dynamicComponent&quot;&gt;&lt;&#x2F;component&gt;&lt;&#x2F;template&gt;&lt;script&gt;export default &#123;  data() &#123;    return &#123;      dynamicComponent: null    &#125;  &#125;,  mounted () &#123;    import(&#39;.&#x2F;lib-that-access-window-on-import&#39;).then(module &#x3D;&gt; &#123;      this.dynamicComponent &#x3D; module.default    &#125;)  &#125;&#125;&lt;&#x2F;script&gt;</code></pre><p>  <strong>参考:</strong></p><ul><li><p><a href="https://cn.vuejs.org/v2/guide/components.html#%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6">Vue.js &gt; 动态组件(opens new window)</a></p><h2 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h2><h3 id="插值"><a href="#插值" class="headerlink" title="插值"></a>插值</h3><p>每一个 Markdown 文件将首先被编译成 HTML，接着作为一个 Vue 组件传入 <code>vue-loader</code>，这意味着你可以在文本中使用 Vue 风格的插值：</p></li></ul><p>  <strong>Input</strong></p>  <pre class="language-md" data-language="md"><code class="language-md">&#123;&#123; 1 + 1 &#125;&#125;</code></pre><p>  <strong>Output</strong></p>  <pre class="language-none"><code class="language-none">2</code></pre><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>  同样地，也可以使用指令:</p><p>  <strong>Input</strong></p>  <pre class="language-md" data-language="md"><code class="language-md"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>i in 3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>&#123;&#123; i &#125;&#125; <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre><p>  <strong>Output</strong></p>  <pre class="language-none"><code class="language-none">1 2 3 </code></pre><h3 id="访问网站以及页面的数据"><a href="#访问网站以及页面的数据" class="headerlink" title="访问网站以及页面的数据"></a>访问网站以及页面的数据</h3><p>  编译后的组件没有私有数据，但可以访问 <a href="https://www.vuepress.cn/theme/writing-a-theme.html#%E7%BD%91%E7%AB%99%E5%92%8C%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE">网站的元数据</a>，举例来说：</p><p>  <strong>Input</strong></p>  <pre class="language-md" data-language="md"><code class="language-md">&#123;&#123; $page &#125;&#125;</code></pre><p>  <strong>Output</strong></p>  <pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>  <span class="token property">"path"</span><span class="token operator">:</span> <span class="token string">"/using-vue.html"</span><span class="token punctuation">,</span>  <span class="token property">"title"</span><span class="token operator">:</span> <span class="token string">"Using Vue in Markdown"</span><span class="token punctuation">,</span>  <span class="token property">"frontmatter"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></code></pre><h2 id="Escaping"><a href="#Escaping" class="headerlink" title="Escaping"></a>Escaping</h2><p>  默认情况下，块级 (block) 的代码块将会被自动包裹在 <code>v-pre</code> 中。如果你想要在内联 (inline) 的代码块或者普通文本中显示原始的大括号，或者一些 Vue 特定的语法，你需要使用自定义容器 <code>v-pre</code> 来包裹：</p><p>  <strong>Input</strong></p>  <pre class="language-md" data-language="md"><code class="language-md">::: v-pre<span class="token code keyword">`&#123;&#123; This will be displayed as-is &#125;&#125;`</span>:::</code></pre><p>  <strong>Output</strong></p>  <pre class="language-none"><code class="language-none">&#123;&#123; This will be displayed as-is &#125;&#125;</code></pre><h2 id="使用组件"><a href="#使用组件" class="headerlink" title="使用组件"></a>使用组件</h2><p>  所有在 <code>.vuepress/components</code> 中找到的 <code>*.vue</code> 文件将会自动地被注册为全局的异步组件，如：</p>  <pre class="language-text" data-language="text"><code class="language-text">.└─ .vuepress   └─ components      ├─ demo-1.vue      ├─ OtherComponent.vue      └─ Foo         └─ Bar.vue</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日常 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> customer </tag>
+            
+            <tag> go </tag>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Monday</title>
+      <link href="/hexo/2021/01/18/Monday/"/>
+      <url>/hexo/2021/01/18/Monday/</url>
+      
+        <content type="html"><![CDATA[<pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span><span class="token keyword">import</span> <span class="token string">'./layout.scss'</span><span class="token punctuation">;</span><span class="token keyword">class</span> <span class="token class-name">AdminLayout</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">&#123;</span>      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">this</span><span class="token punctuation">.</span>myRef <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">createRef</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">&#125;</span>  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>    <span class="token keyword">return</span> <span class="token punctuation">(</span>      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span>className<span class="token punctuation">&#125;</span></span> <span class="token attr-name">ref</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>myRef<span class="token punctuation">&#125;</span></span><span class="token punctuation">></span></span><span class="token plain-text">        </span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">&#125;</span><span class="token plain-text">      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>    <span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token keyword">export</span> <span class="token keyword">default</span> AdminLayout</code></pre><ul><li><input disabled="" type="checkbox"> fff</li><li><input checked="" disabled="" type="checkbox"> 3333</li><li><input disabled="" type="checkbox"> 34444</li></ul><ul><li>cefafaa le</li><li>fwfwff</li><li>fafa</li><li>wewerw</li></ul><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> docs <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span> <span class="token string">'# Hello VuePress2'</span> <span class="token operator">></span> docs/README.md</code></pre><p>此处我们把 <code>docs</code> 目录作为 <code>targetDir</code> （参考 <a href="https://www.vuepress.cn/api/cli.html#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">命令行接口</a>），下面所有的“文件的相对路径”都是相对于 <code>docs</code> 目录的。在项目根目录下的 <code>package.json</code> 中添加 <code>scripts</code> ：</p><pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>    <span class="token property">"docs:dev"</span><span class="token operator">:</span> <span class="token string">"vuepress dev docs2"</span><span class="token punctuation">,</span>    <span class="token property">"docs:build"</span><span class="token operator">:</span> <span class="token string">"vuepress build docs2"</span>  <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></code></pre><pre class="language-stylus" data-language="stylus"><code class="language-stylus"><span class="token selector">.content <span class="token punctuation">&#123;</span></span>  <span class="token property-declaration"><span class="token property">font-size</span> <span class="token number">35</span><span class="token unit">px</span></span><span class="token punctuation">&#125;</span></code></pre><h1 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h1><h2 id="相对路径"><a href="#相对路径" class="headerlink" title="#相对路径"></a><a href="https://www.vuepress.cn/guide/assets.html#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84">#</a>相对路径</h2><p>所有的 Markdown 文件都会被 webpack 编译成 Vue 组件，因此你可以，并且<strong>应该更倾向于</strong>使用相对路径（Relative URLs）来引用所有的静态资源：</p><pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token url"><span class="token operator">!</span>[<span class="token content">An image</span>](<span class="token url">./image.png</span>)</span></code></pre><p>同样地，这在 <code>*.vue</code> 文件的模板中一样可以工作，图片将会被 <code>url-loader</code> 和 <code>file-loader</code> 处理，在运行生成静态文件的构建任务时，文件会被复制到正确的位置。</p><p>除此之外，你也使用 <code>~</code> 前缀来明确地指出这是一个 webpack 的模块请求，这将允许你通过 webpack 别名来引用文件或者 npm 的依赖：</p><pre class="language-md" data-language="md"><code class="language-md"><span class="token url"><span class="token operator">!</span>[<span class="token content">Image from alias</span>](<span class="token url">~@alias/image.png</span>)</span><span class="token url"><span class="token operator">!</span>[<span class="token content">Image from dependency</span>](<span class="token url">~some-dependency/image.png</span>)</span></code></pre><p>Webpack 的别名可以通过 <code>.vuepress/config.js</code> 中 <a href="https://www.vuepress.cn/config/#configurewebpack">configureWebpack</a> 来配置，如：</p><pre class="language-js" data-language="js"><code class="language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>  configureWebpack<span class="token operator">:</span> <span class="token punctuation">&#123;</span>    resolve<span class="token operator">:</span> <span class="token punctuation">&#123;</span>      alias<span class="token operator">:</span> <span class="token punctuation">&#123;</span>        <span class="token string">'@alias'</span><span class="token operator">:</span> <span class="token string">'path/to/some/dir'</span>      <span class="token punctuation">&#125;</span>    <span class="token punctuation">&#125;</span>  <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></code></pre><h2 id="公共文件"><a href="#公共文件" class="headerlink" title="#公共文件"></a><a href="https://www.vuepress.cn/guide/assets.html#%E5%85%AC%E5%85%B1%E6%96%87%E4%BB%B6">#</a>公共文件</h2><p>有时，你可能需要提供一个静态资源，但是它们并不直接被你的任何一个 markdown 文件或者主题组件引用 —— 举例来说，favicons 和 PWA 的图标，在这种情形下，你可以将它们放在 <code>.vuepress/public</code> 中， 它们最终会被复制到生成的静态文件夹中。</p><h2 id="基础路径"><a href="#基础路径" class="headerlink" title="#基础路径"></a><a href="https://www.vuepress.cn/guide/assets.html#%E5%9F%BA%E7%A1%80%E8%B7%AF%E5%BE%84">#</a>基础路径</h2><p>如果你的网站会被部署到一个<strong>非根路径</strong>，你将需要在 <code>.vuepress/config.js</code> 中设置 <code>base</code>，举例来说，如果你打算将你的网站部署到 <code>https://foo.github.io/bar/</code>，那么 <code>base</code> 的值就应该被设置为 <code>&quot;/bar/&quot;</code> (应当总是以斜杠开始，并以斜杠结束)。</p><p>有了基础路径（Base URL），如果你希望引用一张放在 <code>.vuepress/public</code> 中的图片，你需要使用这样路径：<code>/bar/image.png</code>，然而，一旦某一天你决定去修改 <code>base</code>，这样的路径引用将会显得异常脆弱。为了解决这个问题，VuePress 提供了内置的一个 helper <code>$withBase</code>（它被注入到了 Vue 的原型上），可以帮助你生成正确的路径：</p><pre class="language-vue" data-language="vue"><code class="language-vue">&lt;img :src&#x3D;&quot;$withBase(&#39;&#x2F;foo.png&#39;)&quot; alt&#x3D;&quot;foo&quot;&gt;</code></pre><p>值得一提的是，你不仅可以在你的 Vue 组件中使用上述的语法，在 Markdown 文件中亦是如此。</p><p>最后补充一句，一个 <code>base</code> 路径一旦被设置，它将会自动地作为前缀插入到 <code>.vuepress/config.js</code> 中所有以 <code>/</code> 开始的资源路径中。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日常 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> java </tag>
+            
+            <tag> customer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

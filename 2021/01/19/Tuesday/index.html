@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Tuesday</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/hexo/css/markdown.css">
+
+  
+<link rel="stylesheet" href="/hexo/css/post.css">
+
+  
+<script src="/hexo/js/prism.js"></script>
+
+  
+<script src="/hexo/js/jquery.js"></script>
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+<body>
+  <div id="app-book">
+    <div id="book-header">
+      <a id="home-link" href="/">回到首页</a>
+      <h1 id="book-title">Tuesday</h1>
+      <span id="book-date">2021-02-03</span>
+    </div>
+    <div id="book-body">
+      <h1 id="在-Markdown-中-使用-Vue"><a href="#在-Markdown-中-使用-Vue" class="headerlink" title="在 Markdown 中 使用 Vue"></a>在 Markdown 中 使用 Vue</h1><h2 id="浏览器的-API-访问限制"><a href="#浏览器的-API-访问限制" class="headerlink" title="浏览器的 API 访问限制"></a>浏览器的 API 访问限制</h2><p>  当你在开发一个 VuePress 应用时，由于所有的页面在生成静态 HTML 时都需要通过 Node.js 服务端渲染，因此所有的 Vue 相关代码都应当遵循 <a target="_blank" rel="noopener" href="https://ssr.vuejs.org/zh/universal.html">编写通用代码 (opens new window)</a>的要求。简而言之，请确保只在 <code>beforeMount</code> 或者 <code>mounted</code> 访问浏览器 / DOM 的 API。</p>
+<p>  如果你正在使用，或者需要展示一个对于 SSR 不怎么友好的组件（比如包含了自定义指令），你可以将它们包裹在内置的 <code>&lt;ClientOnly&gt;</code> 组件中：</p>
+  <pre class="language-md" data-language="md"><code class="language-md"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ClientOnly</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>NonSSRFriendlyComponent</span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ClientOnly</span><span class="token punctuation">></span></span></code></pre>
+<p>  请注意，这并不能解决一些组件或库在<strong>导入</strong>时就试图访问浏览器 API 的问题 —— 如果需要使用这样的组件或库，你需要在合适的生命周期钩子中<strong>动态导入</strong>它们：</p>
+  <pre class="language-vue" data-language="vue"><code class="language-vue">&lt;script&gt;
+export default &#123;
+  mounted () &#123;
+    import(&#39;.&#x2F;lib-that-access-window-on-import&#39;).then(module &#x3D;&gt; &#123;
+      &#x2F;&#x2F; use code
+    &#125;)
+  &#125;
+&#125;
+&lt;&#x2F;script&gt;</code></pre>
+<p>  如果你的模块通过 <code>export default</code> 导出一个 Vue 组件，那么你可以动态注册它：</p>
+  <pre class="language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;component v-if&#x3D;&quot;dynamicComponent&quot; :is&#x3D;&quot;dynamicComponent&quot;&gt;&lt;&#x2F;component&gt;
+&lt;&#x2F;template&gt;
+&lt;script&gt;
+export default &#123;
+  data() &#123;
+    return &#123;
+      dynamicComponent: null
+    &#125;
+  &#125;,
+  mounted () &#123;
+    import(&#39;.&#x2F;lib-that-access-window-on-import&#39;).then(module &#x3D;&gt; &#123;
+      this.dynamicComponent &#x3D; module.default
+    &#125;)
+  &#125;
+&#125;
+&lt;&#x2F;script&gt;</code></pre>
+<p>  <strong>参考:</strong></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/components.html#%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6">Vue.js &gt; 动态组件(opens new window)</a></p>
+<h2 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h2><h3 id="插值"><a href="#插值" class="headerlink" title="插值"></a>插值</h3><p>每一个 Markdown 文件将首先被编译成 HTML，接着作为一个 Vue 组件传入 <code>vue-loader</code>，这意味着你可以在文本中使用 Vue 风格的插值：</p>
+</li>
+</ul>
+<p>  <strong>Input</strong></p>
+  <pre class="language-md" data-language="md"><code class="language-md">&#123;&#123; 1 + 1 &#125;&#125;</code></pre>
+<p>  <strong>Output</strong></p>
+  <pre class="language-none"><code class="language-none">2</code></pre>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>  同样地，也可以使用指令:</p>
+<p>  <strong>Input</strong></p>
+  <pre class="language-md" data-language="md"><code class="language-md"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>i in 3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>&#123;&#123; i &#125;&#125; <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre>
+<p>  <strong>Output</strong></p>
+  <pre class="language-none"><code class="language-none">1 2 3 </code></pre>
+<h3 id="访问网站以及页面的数据"><a href="#访问网站以及页面的数据" class="headerlink" title="访问网站以及页面的数据"></a>访问网站以及页面的数据</h3><p>  编译后的组件没有私有数据，但可以访问 <a target="_blank" rel="noopener" href="https://www.vuepress.cn/theme/writing-a-theme.html#%E7%BD%91%E7%AB%99%E5%92%8C%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE">网站的元数据</a>，举例来说：</p>
+<p>  <strong>Input</strong></p>
+  <pre class="language-md" data-language="md"><code class="language-md">&#123;&#123; $page &#125;&#125;</code></pre>
+<p>  <strong>Output</strong></p>
+  <pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"path"</span><span class="token operator">:</span> <span class="token string">"/using-vue.html"</span><span class="token punctuation">,</span>
+  <span class="token property">"title"</span><span class="token operator">:</span> <span class="token string">"Using Vue in Markdown"</span><span class="token punctuation">,</span>
+  <span class="token property">"frontmatter"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h2 id="Escaping"><a href="#Escaping" class="headerlink" title="Escaping"></a>Escaping</h2><p>  默认情况下，块级 (block) 的代码块将会被自动包裹在 <code>v-pre</code> 中。如果你想要在内联 (inline) 的代码块或者普通文本中显示原始的大括号，或者一些 Vue 特定的语法，你需要使用自定义容器 <code>v-pre</code> 来包裹：</p>
+<p>  <strong>Input</strong></p>
+  <pre class="language-md" data-language="md"><code class="language-md">::: v-pre
+<span class="token code keyword">`&#123;&#123; This will be displayed as-is &#125;&#125;`</span>
+:::</code></pre>
+<p>  <strong>Output</strong></p>
+  <pre class="language-none"><code class="language-none">&#123;&#123; This will be displayed as-is &#125;&#125;</code></pre>
+<h2 id="使用组件"><a href="#使用组件" class="headerlink" title="使用组件"></a>使用组件</h2><p>  所有在 <code>.vuepress/components</code> 中找到的 <code>*.vue</code> 文件将会自动地被注册为全局的异步组件，如：</p>
+  <pre class="language-text" data-language="text"><code class="language-text">.
+└─ .vuepress
+   └─ components
+      ├─ demo-1.vue
+      ├─ OtherComponent.vue
+      └─ Foo
+         └─ Bar.vue</code></pre>
+    </div>
+    <div id="book-bottom">
+      
+      <div id="prev">
+        <span>上一篇:</span>
+        <a href="/hexo/2021/02/01/My-New-Post/">My New Post</a>
+      </div>
+      
+      
+        <div id="next">
+          <span>下一篇:</span>
+          <a href="/hexo/2021/01/18/Monday/">Monday</a>
+        </div>
+      
+    </div>
+    <div id="back" title="返回顶部"></div>
+  </div>
+</body>
+<script>
+
+  var app = {
+    backBtn: $('#back'),
+    show: false,
+    init: function(){
+      this.backBtn.on('click', this.scrollTop);
+      $(window).scroll(this.debounce(this.windowScroll, 30));
+    },
+    scrollTop: function(){
+      $('body,html').animate({ scrollTop: 0},300);
+    },
+    windowScroll: function(){
+      var distance = $(window).scrollTop();
+      if ( distance > 50 && !app.show) {
+        app.backBtn.fadeIn(200);
+        app.show = true;
+      } 
+      if( distance <=50 && app.show ){
+        app.backBtn.fadeOut(200);
+        app.show = false;
+      }     
+    },
+    debounce: function(fn, wait) {
+      var timeout = null;
+      return function() {
+        if(timeout !== null) clearTimeout(timeout);
+        timeout = setTimeout(fn, wait);
+      }
+    }
+  }
+
+  app.init();
+
+</script>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><%= page.title %></title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+  <%- css('css/markdown.css') %>
+  <%- css('css/post.css') %>
+  <%- js('js/prism.js') %>
+  <%- js('js/jquery.js') %>
+</head>
+<body>
+  <div id="app-book">
+    <div id="book-header">
+      <a id="home-link" href="/">回到首页</a>
+      <h1 id="book-title"><%= page.title %></h1>
+      <span id="book-date"><%- date(page.updated, 'YYYY-MM-DD') %></span>
+    </div>
+    <div id="book-body">
+      <%- page.content %>
+    </div>
+    <div id="book-bottom">
+      <% if (page.prev) {%>
+      <div id="prev">
+        <span>上一篇:</span>
+        <a href="<%- url_for(page.prev.path) %>"><%= page.prev.title %></a>
+      </div>
+      <% } %>
+      <% if (page.next) {%>
+        <div id="next">
+          <span>下一篇:</span>
+          <a href="<%- url_for(page.next.path) %>"><%= page.next.title %></a>
+        </div>
+      <% } %>
+    </div>
+    <div id="back" title="返回顶部"></div>
+  </div>
+</body>
+<script>
+
+  var app = {
+    backBtn: $('#back'),
+    show: false,
+    init: function(){
+      this.backBtn.on('click', this.scrollTop);
+      $(window).scroll(this.debounce(this.windowScroll, 30));
+    },
+    scrollTop: function(){
+      $('body,html').animate({ scrollTop: 0},300);
+    },
+    windowScroll: function(){
+      var distance = $(window).scrollTop();
+      if ( distance > 50 && !app.show) {
+        app.backBtn.fadeIn(200);
+        app.show = true;
+      } 
+      if( distance <=50 && app.show ){
+        app.backBtn.fadeOut(200);
+        app.show = false;
+      }     
+    },
+    debounce: function(fn, wait) {
+      var timeout = null;
+      return function() {
+        if(timeout !== null) clearTimeout(timeout);
+        timeout = setTimeout(fn, wait);
+      }
+    }
+  }
+
+  app.init();
+
+</script>
+</html>

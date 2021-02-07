@@ -12,9 +12,6 @@
 <link rel="stylesheet" href="/hexo/css/post.css">
 
   
-<script src="/hexo/js/prism.js"></script>
-
-  
 <script src="/hexo/js/jquery.js"></script>
 
 <meta name="generator" content="Hexo 5.3.0"></head>
@@ -23,17 +20,26 @@
     <div id="book-header">
       <a id="home-link" href="/hexo">回到首页</a>
       <h1 id="book-title">Hello World</h1>
-      <span id="book-date">2021-02-03</span>
+      <span id="book-date">2021-02-07</span>
     </div>
     <div id="book-body">
       <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
+<h2 id="quick-start"><a class="header-anchor" href="#quick-start">#</a> Quick Start</h2>
+<h3 id="create-a-new-post"><a class="header-anchor" href="#create-a-new-post">#</a> Create a new post</h3>
+<pre><code class="language-bash"><div class="language-bash extra-class"><pre v-pre class="language-bash"><code>$ hexo new <span class="token string">"My New Post"</span>
+</code></pre></div></code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo server</code></pre>
+<h3 id="run-server"><a class="header-anchor" href="#run-server">#</a> Run server</h3>
+<pre><code class="language-bash"><div class="language-bash extra-class"><pre v-pre class="language-bash"><code>$ hexo server
+</code></pre></div></code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo generate</code></pre>
+<h3 id="generate-static-files"><a class="header-anchor" href="#generate-static-files">#</a> Generate static files</h3>
+<pre><code class="language-bash"><div class="language-bash extra-class"><pre v-pre class="language-bash"><code>$ hexo generate
+</code></pre></div></code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="language-bash" data-language="bash"><code class="language-bash">$ hexo deploy</code></pre>
+<h3 id="deploy-to-remote-sites"><a class="header-anchor" href="#deploy-to-remote-sites">#</a> Deploy to remote sites</h3>
+<pre><code class="language-bash"><div class="language-bash extra-class"><pre v-pre class="language-bash"><code>$ hexo deploy
+</code></pre></div></code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
     </div>
@@ -54,14 +60,18 @@
   var app = {
     backBtn: $('#back'),
     show: false,
+    anchorList: {},
     init: function(){
       this.backBtn.on('click', this.scrollTop);
+      this.initAnchorList();
       $(window).scroll(this.debounce(this.windowScroll, 30));
+      this.anchorClick();
     },
     scrollTop: function(){
       $('body,html').animate({ scrollTop: 0},300);
     },
     windowScroll: function(){
+      var offsetArray = Object.keys(app.anchorList);
       var distance = $(window).scrollTop();
       if ( distance > 50 && !app.show) {
         app.backBtn.fadeIn(200);
@@ -71,6 +81,18 @@
         app.backBtn.fadeOut(200);
         app.show = false;
       }     
+
+
+      var prev = offsetArray[0];
+      for(item of offsetArray){
+        if(item>(distance+10)){
+          target = app.anchorList[prev];
+          $(".table-of-contents a").removeClass('active');
+          target.addClass("active");
+          break;
+        }
+        prev = item;
+      }
     },
     debounce: function(fn, wait) {
       var timeout = null;
@@ -78,6 +100,28 @@
         if(timeout !== null) clearTimeout(timeout);
         timeout = setTimeout(fn, wait);
       }
+    },
+    initAnchorList: function(){
+      $(".table-of-contents a").each(function(){
+        var id = $(this).attr("href");
+        var $target = $(id);
+        var targetOffset = $target.offset().top;
+        app.anchorList[targetOffset]  = $(this);
+      })
+    },
+    anchorClick: function(){
+      $(".table-of-contents a").click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+          var id = $(this).attr("href");
+          var $target = $(id);
+          $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body').animate( { scrollTop: targetOffset }, 300);
+            return false;
+          }
+        }
+      });
     }
   }
 
@@ -85,3 +129,5 @@
 
 </script>
 </html>
+
+

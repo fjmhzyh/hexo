@@ -12,9 +12,6 @@
 <link rel="stylesheet" href="/hexo/css/post.css">
 
   
-<script src="/hexo/js/prism.js"></script>
-
-  
 <script src="/hexo/js/jquery.js"></script>
 
 <meta name="generator" content="Hexo 5.3.0"></head>
@@ -23,16 +20,22 @@
     <div id="book-header">
       <a id="home-link" href="/hexo">回到首页</a>
       <h1 id="book-title">My New Post</h1>
-      <span id="book-date">2021-02-03</span>
+      <span id="book-date">2021-02-07</span>
     </div>
     <div id="book-body">
-      
+      <p><div class="table-of-contents"><ul></ul></div></p>
+<pre><code class="language-vue"><div class="language-vue extra-class"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">:src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$withBase(<span class="token punctuation">'</span>/foo.png<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>foo<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+</code></pre></div></code></pre>
+<p>🎉</p>
+<p>💯</p>
+<p>😃</p>
+
     </div>
     <div id="book-bottom">
       
       <div id="prev">
         <span>上一篇:</span>
-        <a href="/hexo/2021/02/03/hello-world/">Hello World</a>
+        <a href="/hexo/2021/02/07/hello-world/">Hello World</a>
       </div>
       
       
@@ -50,14 +53,18 @@
   var app = {
     backBtn: $('#back'),
     show: false,
+    anchorList: {},
     init: function(){
       this.backBtn.on('click', this.scrollTop);
+      this.initAnchorList();
       $(window).scroll(this.debounce(this.windowScroll, 30));
+      this.anchorClick();
     },
     scrollTop: function(){
       $('body,html').animate({ scrollTop: 0},300);
     },
     windowScroll: function(){
+      var offsetArray = Object.keys(app.anchorList);
       var distance = $(window).scrollTop();
       if ( distance > 50 && !app.show) {
         app.backBtn.fadeIn(200);
@@ -67,6 +74,18 @@
         app.backBtn.fadeOut(200);
         app.show = false;
       }     
+
+
+      var prev = offsetArray[0];
+      for(item of offsetArray){
+        if(item>(distance+10)){
+          target = app.anchorList[prev];
+          $(".table-of-contents a").removeClass('active');
+          target.addClass("active");
+          break;
+        }
+        prev = item;
+      }
     },
     debounce: function(fn, wait) {
       var timeout = null;
@@ -74,6 +93,28 @@
         if(timeout !== null) clearTimeout(timeout);
         timeout = setTimeout(fn, wait);
       }
+    },
+    initAnchorList: function(){
+      $(".table-of-contents a").each(function(){
+        var id = $(this).attr("href");
+        var $target = $(id);
+        var targetOffset = $target.offset().top;
+        app.anchorList[targetOffset]  = $(this);
+      })
+    },
+    anchorClick: function(){
+      $(".table-of-contents a").click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+          var id = $(this).attr("href");
+          var $target = $(id);
+          $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body').animate( { scrollTop: targetOffset }, 300);
+            return false;
+          }
+        }
+      });
     }
   }
 
@@ -81,3 +122,5 @@
 
 </script>
 </html>
+
+

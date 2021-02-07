@@ -19,46 +19,6 @@
 }
 
 
-pre[class*=language-] {
-  position: relative;
-  padding: 1.25rem 1.5rem;
-  border-radius: 6px;
-  background-color: #282c34;
-}
-
-
-div[class*=language-] pre, div[class*=language-] pre[class*=language-] {
-  background: transparent;
-  position: relative;
-  z-index: 1;
-}
-
-
-code {
-  margin: 0;
-  padding: .25rem .5rem;
-  font-size: .85em;
-  color: #476582;
-  background-color: #f7f7f7;
-  border-radius: 3px;
-  font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
-}
-
-
-pre[class*=language-] code,  pre code {
-  color: #fff;
-  padding: 0;
-  background-color: transparent;
-  border-radius: 0;
-}
-
-
-pre code{
-  font-size: 16px;
-  font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
-}
-
-
 ol, p, ul {
   line-height: 1.7;
 }
@@ -151,7 +111,75 @@ td, th {
 }
 
 
-pre[class*=language-]:before {
+
+div[class*=language-] {
+  position: relative;
+  background-color: #282c34;
+  border-radius: 6px;
+}
+
+
+div[class*=language-] pre, div[class*=language-] pre[class*=language-] {
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+
+code[class*=language-], pre[class*=language-] {
+  color: #ccc;
+  background: none;
+  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+
+code[class*=language-], pre[class*=language-] {
+  color: #ccc;
+  background: none;
+  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+
+pre[class*=language-] code,  pre code {
+  color: #fff;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+
+pre code{
+  font-size: 16px;
+  font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
+}
+
+div[class*=language-]:before {
   position: absolute;
   z-index: 3;
   top: .8em;
@@ -160,110 +188,126 @@ pre[class*=language-]:before {
   color: hsla(0,0%,100%,.4);
 }
 
-pre[class~=language-js]:before {
+div[class*=language-] pre, div[class*=language-] pre[class*=language-] {
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+pre[class*=language-] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+}
+
+div[class~=language-js]:before {
   content: "js";
 }
 
-pre[class~=language-bash]:before {
+div[class~=language-bash]:before {
   content: "bash";
 }
 
-pre[class~=language-json]:before {
+div[class~=language-json]:before {
   content: "json";
 }
 
-pre[class~=language-sh]:before {
+div[class~=language-sh]:before {
   content: "sh";
 }
 
-pre[class~=language-stylus]:before {
+div[class~=language-stylus]:before {
   content: "stylus";
 }
 
-pre[class~=language-scss]:before {
+div[class~=language-scss]:before {
   content: "scss";
 }
 
-pre[class~=language-sass]:before {
+div[class~=language-sass]:before {
   content: "sass";
 }
 
-pre[class~=language-less]:before {
+div[class~=language-less]:before {
   content: "less";
 }
 
-pre[class~=language-css]:before {
+div[class~=language-css]:before {
    content: "css";
 }
 
-pre[class~=language-md]:before {
+div[class~=language-md]:before {
   content: "md";
 }
 
-pre[class~=language-vue]:before {
+div[class~=language-vue]:before {
   content: "vue";
 }
 
-pre[class~=language-react]:before {
+div[class~=language-react]:before {
   content: "react";
 }
 
-pre[class~=language-jsx]:before {
+div[class~=language-jsx]:before {
   content: "jsx";
 }
 
-pre[class~=language-tsx]:before {
+div[class~=language-tsx]:before {
   content: "tsx";
 }
 
-pre[class~=language-angular]:before {
+div[class~=language-angular]:before {
   content: "angular";
 }
 
-pre[class~=language-android]:before {
+div[class~=language-android]:before {
   content: "android";
 }
 
-pre[class~=language-swift]:before {
+div[class~=language-swift]:before {
   content: "swift";
 }
 
-pre[class~=language-java]:before {
+div[class~=language-java]:before {
   content: "java";
 }
 
-pre[class~=language-nginx]:before {
+div[class~=language-nginx]:before {
   content: "nginx";
 }
 
-pre[class~=language-yaml]:before {
+div[class~=language-yaml]:before {
   content: "yaml";
 }
 
-pre[class~=language-mysql]:before {
+div[class~=language-mysql]:before {
   content: "mysql";
 }
 
-pre[class~=language-sql]:before {
+div[class~=language-sql]:before {
   content: "sql";
 }
 
-pre[class~=language-html]:before {
+div[class~=language-html]:before {
   content: "html";
 }
 
-pre[class~=language-xml]:before {
+div[class~=language-xml]:before {
   content: "xml";
 }
 
-pre[class~=language-markdown]:before {
+div[class~=language-markdown]:before {
   content: "markdown";
 }
 
-pre[class~=language-ejs]:before {
+div[class~=language-ejs]:before {
   content: "ejs";
 }
 
-pre[class~=language-python]:before {
+div[class~=language-python]:before {
   content: "python";
+}
+
+div[class~=language-text]:before {
+  content: "text";
 }

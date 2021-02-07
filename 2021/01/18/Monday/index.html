@@ -12,9 +12,6 @@
 <link rel="stylesheet" href="/hexo/css/post.css">
 
   
-<script src="/hexo/js/prism.js"></script>
-
-  
 <script src="/hexo/js/jquery.js"></script>
 
 <meta name="generator" content="Hexo 5.3.0"></head>
@@ -23,74 +20,97 @@
     <div id="book-header">
       <a id="home-link" href="/hexo">回到首页</a>
       <h1 id="book-title">Monday</h1>
-      <span id="book-date">2021-02-03</span>
+      <span id="book-date">2021-02-07</span>
     </div>
     <div id="book-body">
-      <pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+      <p><div class="table-of-contents"><ul><li><a href="#静态资源"> 静态资源</a><ul><li><a href="#相对路径"> #相对路径</a></li><li><a href="#公共文件"> #公共文件</a></li><li><a href="#基础路径"> #基础路径</a></li></ul></li></ul></div></p>
+<pre><code class="language-jsx"><div class="language-jsx extra-class"><pre v-pre class="language-jsx"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token string">'./layout.scss'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">class</span> <span class="token class-name">AdminLayout</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">class</span> <span class="token class-name">AdminLayout</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
     
-  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>myRef <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">createRef</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">}</span>
 
-  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span>className<span class="token punctuation">&#125;</span></span> <span class="token attr-name">ref</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>myRef<span class="token punctuation">&#125;</span></span><span class="token punctuation">></span></span><span class="token plain-text">
-        </span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">&#125;</span><span class="token plain-text">
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>className<span class="token punctuation">}</span></span> <span class="token attr-name">ref</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>myRef<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">}</span><span class="token plain-text">
       </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
     <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> AdminLayout
-</code></pre>
+
+</code></pre></div></code></pre>
 <ul>
-<li><input disabled="" type="checkbox"> fff</li>
-<li><input checked="" disabled="" type="checkbox"> 3333</li>
-<li><input disabled="" type="checkbox"> 34444</li>
+<li>
+<p>[ ] fff</p>
+</li>
+<li>
+<p>[x] 3333</p>
+</li>
+<li>
+<p>[ ] 34444</p>
+</li>
+<li>
+<p>cefafaa le</p>
+</li>
+<li>
+<p>fwfwff</p>
+</li>
+<li>
+<p>fafa</p>
+</li>
+<li>
+<p>wewerw</p>
+</li>
 </ul>
-<ul>
-<li>cefafaa le</li>
-<li>fwfwff</li>
-<li>fafa</li>
-<li>wewerw</li>
-</ul>
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> docs <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span> <span class="token string">'# Hello VuePress2'</span> <span class="token operator">></span> docs/README.md</code></pre>
+<pre><code class="language-bash"><div class="language-bash extra-class"><pre v-pre class="language-bash"><code><span class="token function">mkdir</span> docs <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span> <span class="token string">'# Hello VuePress2'</span> <span class="token operator">></span> docs/README.md
+</code></pre></div></code></pre>
 <p>此处我们把 <code>docs</code> 目录作为 <code>targetDir</code> （参考 <a target="_blank" rel="noopener" href="https://www.vuepress.cn/api/cli.html#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">命令行接口</a>），下面所有的“文件的相对路径”都是相对于 <code>docs</code> 目录的。在项目根目录下的 <code>package.json</code> 中添加 <code>scripts</code> ：</p>
-<pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
-  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+<pre><code class="language-json"><div class="language-json extra-class"><pre v-pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">"docs:dev"</span><span class="token operator">:</span> <span class="token string">"vuepress dev docs2"</span><span class="token punctuation">,</span>
     <span class="token property">"docs:build"</span><span class="token operator">:</span> <span class="token string">"vuepress build docs2"</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
-
-<pre class="language-stylus" data-language="stylus"><code class="language-stylus"><span class="token selector">.content <span class="token punctuation">&#123;</span></span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></code></pre>
+<pre><code class="language-stylus"><div class="language-stylus extra-class"><pre v-pre class="language-stylus"><code><span class="token selector">.content <span class="token punctuation">{</span></span>
   <span class="token property-declaration"><span class="token property">font-size</span> <span class="token number">35</span><span class="token unit">px</span></span>
-<span class="token punctuation">&#125;</span></code></pre>
-<h1 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h1><h2 id="相对路径"><a href="#相对路径" class="headerlink" title="#相对路径"></a><a target="_blank" rel="noopener" href="https://www.vuepress.cn/guide/assets.html#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84">#</a>相对路径</h2><p>所有的 Markdown 文件都会被 webpack 编译成 Vue 组件，因此你可以，并且<strong>应该更倾向于</strong>使用相对路径（Relative URLs）来引用所有的静态资源：</p>
-<pre class="language-markdown" data-language="markdown"><code class="language-markdown"><span class="token url"><span class="token operator">!</span>[<span class="token content">An image</span>](<span class="token url">./image.png</span>)</span></code></pre>
+<span class="token punctuation">}</span>
+</code></pre></div></code></pre>
+<h1 id="静态资源"><a class="header-anchor" href="#静态资源">#</a> 静态资源</h1>
+<h2 id="相对路径"><a class="header-anchor" href="#相对路径">#</a> <a target="_blank" rel="noopener" href="https://www.vuepress.cn/guide/assets.html#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84">#</a>相对路径</h2>
+<p>所有的 Markdown 文件都会被 webpack 编译成 Vue 组件，因此你可以，并且<strong>应该更倾向于</strong>使用相对路径（Relative URLs）来引用所有的静态资源：</p>
+<pre><code class="language-markdown"><div class="language-markdown extra-class"><pre v-pre class="language-markdown"><code><span class="token url"><span class="token operator">!</span>[<span class="token content">An image</span>](<span class="token url">./image.png</span>)</span>
+</code></pre></div></code></pre>
 <p>同样地，这在 <code>*.vue</code> 文件的模板中一样可以工作，图片将会被 <code>url-loader</code> 和 <code>file-loader</code> 处理，在运行生成静态文件的构建任务时，文件会被复制到正确的位置。</p>
 <p>除此之外，你也使用 <code>~</code> 前缀来明确地指出这是一个 webpack 的模块请求，这将允许你通过 webpack 别名来引用文件或者 npm 的依赖：</p>
-<pre class="language-md" data-language="md"><code class="language-md"><span class="token url"><span class="token operator">!</span>[<span class="token content">Image from alias</span>](<span class="token url">~@alias/image.png</span>)</span>
-<span class="token url"><span class="token operator">!</span>[<span class="token content">Image from dependency</span>](<span class="token url">~some-dependency/image.png</span>)</span></code></pre>
+<pre><code class="language-md"><div class="language-md extra-class"><pre v-pre class="language-md"><code><span class="token url"><span class="token operator">!</span>[<span class="token content">Image from alias</span>](<span class="token url">~@alias/image.png</span>)</span>
+<span class="token url"><span class="token operator">!</span>[<span class="token content">Image from dependency</span>](<span class="token url">~some-dependency/image.png</span>)</span>
+</code></pre></div></code></pre>
 <p>Webpack 的别名可以通过 <code>.vuepress/config.js</code> 中 <a target="_blank" rel="noopener" href="https://www.vuepress.cn/config/#configurewebpack">configureWebpack</a> 来配置，如：</p>
-<pre class="language-js" data-language="js"><code class="language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  configureWebpack<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    resolve<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-      alias<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+<pre><code class="language-js"><div class="language-js extra-class"><pre v-pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  configureWebpack<span class="token operator">:</span> <span class="token punctuation">{</span>
+    resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
+      alias<span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token string">'@alias'</span><span class="token operator">:</span> <span class="token string">'path/to/some/dir'</span>
-      <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<h2 id="公共文件"><a href="#公共文件" class="headerlink" title="#公共文件"></a><a target="_blank" rel="noopener" href="https://www.vuepress.cn/guide/assets.html#%E5%85%AC%E5%85%B1%E6%96%87%E4%BB%B6">#</a>公共文件</h2><p>有时，你可能需要提供一个静态资源，但是它们并不直接被你的任何一个 markdown 文件或者主题组件引用 —— 举例来说，favicons 和 PWA 的图标，在这种情形下，你可以将它们放在 <code>.vuepress/public</code> 中， 它们最终会被复制到生成的静态文件夹中。</p>
-<h2 id="基础路径"><a href="#基础路径" class="headerlink" title="#基础路径"></a><a target="_blank" rel="noopener" href="https://www.vuepress.cn/guide/assets.html#%E5%9F%BA%E7%A1%80%E8%B7%AF%E5%BE%84">#</a>基础路径</h2><p>如果你的网站会被部署到一个<strong>非根路径</strong>，你将需要在 <code>.vuepress/config.js</code> 中设置 <code>base</code>，举例来说，如果你打算将你的网站部署到 <code>https://foo.github.io/bar/</code>，那么 <code>base</code> 的值就应该被设置为 <code>&quot;/bar/&quot;</code> (应当总是以斜杠开始，并以斜杠结束)。</p>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></code></pre>
+<h2 id="公共文件"><a class="header-anchor" href="#公共文件">#</a> <a target="_blank" rel="noopener" href="https://www.vuepress.cn/guide/assets.html#%E5%85%AC%E5%85%B1%E6%96%87%E4%BB%B6">#</a>公共文件</h2>
+<p>有时，你可能需要提供一个静态资源，但是它们并不直接被你的任何一个 markdown 文件或者主题组件引用 —— 举例来说，favicons 和 PWA 的图标，在这种情形下，你可以将它们放在 <code>.vuepress/public</code> 中， 它们最终会被复制到生成的静态文件夹中。</p>
+<h2 id="基础路径"><a class="header-anchor" href="#基础路径">#</a> <a target="_blank" rel="noopener" href="https://www.vuepress.cn/guide/assets.html#%E5%9F%BA%E7%A1%80%E8%B7%AF%E5%BE%84">#</a>基础路径</h2>
+<p>如果你的网站会被部署到一个<strong>非根路径</strong>，你将需要在 <code>.vuepress/config.js</code> 中设置 <code>base</code>，举例来说，如果你打算将你的网站部署到 <code>https://foo.github.io/bar/</code>，那么 <code>base</code> 的值就应该被设置为 <code>&quot;/bar/&quot;</code> (应当总是以斜杠开始，并以斜杠结束)。</p>
 <p>有了基础路径（Base URL），如果你希望引用一张放在 <code>.vuepress/public</code> 中的图片，你需要使用这样路径：<code>/bar/image.png</code>，然而，一旦某一天你决定去修改 <code>base</code>，这样的路径引用将会显得异常脆弱。为了解决这个问题，VuePress 提供了内置的一个 helper <code>$withBase</code>（它被注入到了 Vue 的原型上），可以帮助你生成正确的路径：</p>
-<pre class="language-vue" data-language="vue"><code class="language-vue">&lt;img :src&#x3D;&quot;$withBase(&#39;&#x2F;foo.png&#39;)&quot; alt&#x3D;&quot;foo&quot;&gt;</code></pre>
+<pre><code class="language-vue"><div class="language-vue extra-class"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">:src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$withBase(<span class="token punctuation">'</span>/foo.png<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>foo<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+</code></pre></div></code></pre>
 <p>值得一提的是，你不仅可以在你的 Vue 组件中使用上述的语法，在 Markdown 文件中亦是如此。</p>
 <p>最后补充一句，一个 <code>base</code> 路径一旦被设置，它将会自动地作为前缀插入到 <code>.vuepress/config.js</code> 中所有以 <code>/</code> 开始的资源路径中。</p>
 
@@ -112,14 +132,18 @@
   var app = {
     backBtn: $('#back'),
     show: false,
+    anchorList: {},
     init: function(){
       this.backBtn.on('click', this.scrollTop);
+      this.initAnchorList();
       $(window).scroll(this.debounce(this.windowScroll, 30));
+      this.anchorClick();
     },
     scrollTop: function(){
       $('body,html').animate({ scrollTop: 0},300);
     },
     windowScroll: function(){
+      var offsetArray = Object.keys(app.anchorList);
       var distance = $(window).scrollTop();
       if ( distance > 50 && !app.show) {
         app.backBtn.fadeIn(200);
@@ -129,6 +153,18 @@
         app.backBtn.fadeOut(200);
         app.show = false;
       }     
+
+
+      var prev = offsetArray[0];
+      for(item of offsetArray){
+        if(item>(distance+10)){
+          target = app.anchorList[prev];
+          $(".table-of-contents a").removeClass('active');
+          target.addClass("active");
+          break;
+        }
+        prev = item;
+      }
     },
     debounce: function(fn, wait) {
       var timeout = null;
@@ -136,6 +172,28 @@
         if(timeout !== null) clearTimeout(timeout);
         timeout = setTimeout(fn, wait);
       }
+    },
+    initAnchorList: function(){
+      $(".table-of-contents a").each(function(){
+        var id = $(this).attr("href");
+        var $target = $(id);
+        var targetOffset = $target.offset().top;
+        app.anchorList[targetOffset]  = $(this);
+      })
+    },
+    anchorClick: function(){
+      $(".table-of-contents a").click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+          var id = $(this).attr("href");
+          var $target = $(id);
+          $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body').animate( { scrollTop: targetOffset }, 300);
+            return false;
+          }
+        }
+      });
     }
   }
 
@@ -143,3 +201,5 @@
 
 </script>
 </html>
+
+

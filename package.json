@@ -23,6 +23,6 @@
     "hexo-renderer-stylus": "^2.0.0",
     "hexo-server": "^2.0.0",
     "hexo-theme-landscape": "^0.0.3",
-    "hexo-super-prism": "0.0.1"
+    "hexo-super-render": "0.0.1"
   }
 }

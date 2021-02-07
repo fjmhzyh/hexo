@@ -5,6 +5,8 @@ categories: 日常
 tags: ['python', 'java', 'customer']
 ---
 
+[[toc]]
+
 ```jsx
 import React from 'react';
 import './layout.scss';

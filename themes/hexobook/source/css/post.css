@@ -97,3 +97,32 @@
 #book-bottom a:hover{
   text-decoration: underline;
 }
+
+
+.table-of-contents{
+  position: fixed;
+  top: 80px;
+  right: calc((100vw - 800px)/2 - 280px);
+  width: 220px;
+  border-left: 1px solid #EFEFEF;
+}
+
+
+.table-of-contents ul,.table-of-contents li{
+  padding-left: 8px;
+  list-style: none;
+}
+
+.table-of-contents a{
+  height: 24px;
+  line-height: 24px;
+  font-size: 15px;
+  color: #999 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-of-contents a.active{
+  color: #4183c4 !important;
+}

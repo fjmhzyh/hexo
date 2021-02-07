@@ -7,7 +7,6 @@
   <link href="https://cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
   <%- css('css/markdown.css') %>
   <%- css('css/post.css') %>
-  <%- js('js/prism.js') %>
   <%- js('js/jquery.js') %>
 </head>
 <body>
@@ -18,7 +17,7 @@
       <span id="book-date"><%- date(page.updated, 'YYYY-MM-DD') %></span>
     </div>
     <div id="book-body">
-      <%- page.content %>
+      <%- page.html %>
     </div>
     <div id="book-bottom">
       <% if (page.prev) {%>
@@ -42,14 +41,18 @@
   var app = {
     backBtn: $('#back'),
     show: false,
+    anchorList: {},
     init: function(){
       this.backBtn.on('click', this.scrollTop);
+      this.initAnchorList();
       $(window).scroll(this.debounce(this.windowScroll, 30));
+      this.anchorClick();
     },
     scrollTop: function(){
       $('body,html').animate({ scrollTop: 0},300);
     },
     windowScroll: function(){
+      var offsetArray = Object.keys(app.anchorList);
       var distance = $(window).scrollTop();
       if ( distance > 50 && !app.show) {
         app.backBtn.fadeIn(200);
@@ -59,6 +62,18 @@
         app.backBtn.fadeOut(200);
         app.show = false;
       }     
+
+
+      var prev = offsetArray[0];
+      for(item of offsetArray){
+        if(item>(distance+10)){
+          target = app.anchorList[prev];
+          $(".table-of-contents a").removeClass('active');
+          target.addClass("active");
+          break;
+        }
+        prev = item;
+      }
     },
     debounce: function(fn, wait) {
       var timeout = null;
@@ -66,6 +81,28 @@
         if(timeout !== null) clearTimeout(timeout);
         timeout = setTimeout(fn, wait);
       }
+    },
+    initAnchorList: function(){
+      $(".table-of-contents a").each(function(){
+        var id = $(this).attr("href");
+        var $target = $(id);
+        var targetOffset = $target.offset().top;
+        app.anchorList[targetOffset]  = $(this);
+      })
+    },
+    anchorClick: function(){
+      $(".table-of-contents a").click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+          var id = $(this).attr("href");
+          var $target = $(id);
+          $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+          if ($target.length) {
+            var targetOffset = $target.offset().top;
+            $('html,body').animate( { scrollTop: targetOffset }, 300);
+            return false;
+          }
+        }
+      });
     }
   }
 
@@ -73,3 +110,5 @@
 
 </script>
 </html>
+
+
